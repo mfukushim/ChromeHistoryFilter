@@ -70,4 +70,4 @@ fabric.properties
 /project/project/target/config-classes/
 /project/target/
 
-assets/urlfilter.csv
+/.idea/modules/
