@@ -162,7 +162,7 @@ object HistoryFilterApplication extends App {
             a
           }).map(f => {
             f.map(item => {
-              HistoryItem(order = 0L, id = item._1.toLong, date = chromeTickToDate(item._6),
+              HistoryItem(order = 0, id = item._1.toLong, date = chromeTickToDate(item._6),
                 title = item._3, url = item._2, visitCount = item._4, typedCount = item._5, transition = "")
             })
 
@@ -192,8 +192,7 @@ object HistoryFilterApplication extends App {
     })
     val sortedHistory = excludedHistory.groupBy(_.url).map(a => {
       a._2.head
-    }).toList.sortBy(_.order)
-
+    }).toList.sortBy(_.date)(Ordering.by[DateTime,Long](d=>d.getMillis)).reverse
     using(CSVWriter.open(config.out.toFile, "sjis"))(wr => {
       sortedHistory.foreach(item => wr.writeRow(item))
     })
