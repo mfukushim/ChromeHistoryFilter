@@ -142,7 +142,7 @@ object HistoryFilterApplication extends App {
         val os = System.getProperty("os.name").toLowerCase
         val filePath = Paths.get(System.getProperty("user.home"),
           if (os.contains("windows")) """AppData\Local\Google\Chrome\User Data\Default\History"""
-          else if (os.contains("mac")) "Libraries/Application Support/Google/Chrome/Default/History" else "History")
+          else if (os.contains("mac")) "Library/Application Support/Google/Chrome/System Profile/History" else "History")
 
         val tempFile = Files.createTempFile("chfdummy", null)
         Files.copy(filePath, tempFile, StandardCopyOption.REPLACE_EXISTING)
